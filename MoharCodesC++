@@ -1,0 +1,2249 @@
+string reverseWords(string S) 
+    { 
+        // code here 
+        int l =S.length();string reverse =""; vector<string> vs;
+        for(int i =0;i<l;i++)
+        {
+            while((S[i] != '.') && (i<l))
+            {
+                reverse += S[i];
+                i++;
+            }
+            vs.push_back(reverse);
+            reverse ="";
+        }
+        int count=0; string expect;
+        for(int k =vs.size()-1;k>=0;k--)
+        {
+            if(k !=0)
+            {
+                expect+=vs[k];
+                expect+='.';
+            }
+            else
+            {
+                expect+=vs[k];
+            }
+        }
+        
+      
+        return expect;
+
+
+-----------------------------------------------------------------------------------------------------------------
+vector<int> findTwoElement(vector<int> arr, int n) {
+        // code here
+        vector<int>result;int j;int HASH[n+1]={0};int repeat =0;int missing=0;
+        sort(arr.begin(),arr.end());
+        for(int i=0;i<n;i++)
+        {
+            HASH[arr[i]]++;
+            
+        }
+        
+        for(int i=0;i<n+1;i++)
+        {
+            if(HASH[i] > 1)
+            {
+                repeat = i;
+            }
+        }
+        
+        for(int i=1;i<n+1;i++)
+        {
+            if(HASH[i] == 0)
+            {
+                missing = i;
+            }
+        }
+        
+        return {repeat,missing};
+    }
+
+---------------------------------------------------------------------------------------------------
+
+  int firstRepeated(int arr[], int n) {
+        // code here
+        map<int,int> mp;
+        for(int i=0;i<n;i++)
+        {
+            mp[arr[i]]++;
+        }
+        int min=INT_MAX;int flag=0;
+        for(int j=0;j<n;j++)
+        {
+          if(mp[arr[j]] > 1)
+          {
+              flag =1;
+              break;
+          }
+          
+        }
+        
+        if(flag == 0)
+        {
+            return -1;
+        }
+        
+        for(int j=0;j<n;j++)
+        {
+          if(mp[arr[j]] > 1)
+          {
+              if(j<min)
+              {
+                  min = j+1;
+              }
+          }
+          
+        }
+        
+        return min;
+    }
+---------------------------------------------------------------------------------------------------
+ int kthElement(int arr1[], int arr2[], int n, int m, int k)
+    {
+        int temp[m+n];
+        for(int i=0;i<n;i++)
+        {
+            temp[i] = arr1[i];
+        }
+        int p=n;
+        for(int j=0;j<m;j++)
+        {
+            temp[p++] = arr2[j];
+        }
+        
+        sort(temp,temp+p);
+        
+        int number=0;
+        number = temp[k-1];
+        
+        return number;
+    }
+
+---------------------------------------------------------------------------------------------------------
+int countBits(int N){
+        // code here
+        vector<int> V;int count=0;
+        for(int i=1;i<=N;i++)
+        {
+           count+= toBinary(i,V);
+        }
+        
+        return count;
+    }
+    
+    int toBinary(int num,vector<int> V)
+    {
+        int digit=0;int check=0;
+        while(num !=0)
+        {
+            digit = num%2;
+            num=num/2;
+            V.push_back(digit);
+        }
+        
+        for(int i=0;i<V.size();i++)
+        {
+            if(V[i] == 1)
+            {
+                check++;
+            }
+        }
+        
+        return check;
+    }
+
+---------------------------------------------------------------------------------------------
+
+ int setBit(int N)
+    {
+        // Write Your Code here
+       int temp = N;int count=0;
+       while(temp)
+       {
+           if((temp & 1) == 1)
+           {
+               temp >>=1;
+               count++;
+           }
+           else
+           {
+               break;
+           }
+       }
+       
+       return (N | (1<<count));
+    }
+
+------------------------------------------------------------------------------------------------
+ bool checkKthBit(int n, int k)
+    {
+        // Your code here
+        // It can be a one liner logic!! Think of it!!
+        return(n&(1<<k) ? true : false);
+    }
+
+-----------------------------------------------------------------------------------------------
+int maxOnes(int a[], int n)
+    {
+        // Your code goes here
+        int one=0;int zero=0;
+        
+        int maxm = INT_MIN;
+        for(int i=0;i<n;i++)
+        {
+            if(a[i] == 0)
+            {
+                zero++;
+            }
+            if(a[i] == 1)
+            {
+                one++;
+                if(zero > 0)
+                {
+                    zero--;
+                }
+            }
+            maxm = max(maxm,zero);
+        }
+        return (maxm+one);
+    }
+
+---------------------------------------------------------------------------------------------------
+int isBitSet(int N){
+        // code here 
+        int flag=0;
+        if(N == 0)
+        {
+            return 0;
+        }
+        while(N)
+        {
+            if((N & 1) == 1)
+            {
+                N >>=1;
+            }
+            else
+            {
+                flag=1;
+                break;
+            }
+        }
+        
+        return (flag ? 0 : 1);
+    }
+--------------------------------------------------------------------------------------------------------------
+  int setKthBit(int N, int K)
+    {
+        // Write Your Code here
+        return (N | (1<<K));
+    }
+    
+-----------------------------------------------------------------------------------------
+vector<int> singleNumber(vector<int> nums) 
+    {
+        // Code here.
+        map<int,int> mp;
+        vector<int> V;
+        for(int i=0;i<nums.size();i++)
+        {
+            mp[nums[i]]++;
+        }
+        
+        for(int j=0;j<nums.size();j++)
+        {
+            if(mp[nums[j]] == 1)
+            {
+                V.push_back(nums[j]);
+            }
+        }
+        
+        sort(V.begin(),V.end());
+        
+        return V;
+    }
+-------------------------------------------------------------------------------------------
+https://www.geeksforgeeks.org/detect-and-remove-loop-in-a-linked-list/
+
+-------------------------------------------------------------------------------------------
+
+	int isPalindrome(string S)
+	{
+	    // Your code goes here
+	    int n = S.length()-1;int l=0;
+	    
+	    while(l<n)
+	    {
+	        if(S[l++] != S[n--])
+	        {
+	            return 0;
+	        }
+	    }
+	    return 1;
+	}
+
+-----------------------------------------------------------------------------------------------------
+
+/*You are required to complete this method */
+    int atoi(string s) {
+        //Your code here
+        int n=s.length();
+        int i =0;int flag=0;
+        if(s[i] == '-')
+        {
+            flag=1;
+            i=1;
+        }
+        int value=0;
+        for(;i<n;i++)
+        {
+            if(s[i]>=48 && s[i] <=57)
+            {
+               value = value*10 + (s[i]-48); 
+            }
+            
+            else
+            {
+                return -1;
+            }
+        }
+        
+        if(flag)
+        {
+            return (-1*value);
+        }
+        
+        return value;
+
+
+-----------------------------------------------------------------------------------------------
+/Function to locate the occurrence of the string x in the string s.
+int strstr(string s, string x)
+{
+     //Your code here
+     int n = x.length();
+     int l =s.length();string check="";int index=0;int flag=0;
+     for(int i=0;i<l;i++)
+     {
+        check = s.substr(i,n);
+        
+        if(check == x)
+        {
+            index = i;
+            flag=1;
+            break;
+        }
+     }
+     
+     if(flag)
+     {
+         return index;
+     }
+     else{
+         return -1;
+     }
+}
+----------------------------------------------------------------------------------------
+  string UncommonChars(string A, string B)
+        {
+            // code here
+            int m=A.length();
+            int n=B.length();
+            int CountA[26]={0};
+            int CountB[26]={0};
+            for(int i=0;i<m;i++)
+            {
+               CountA[A[i]-'a']++; 
+            }
+            
+            for(int i=0;i<n;i++)
+            {
+               CountB[B[i]-'a']++; 
+            }
+            string temp="";int flag=0;
+            for(int k=0;k<26;k++)
+            {
+                if((CountA[k] != 0) && (CountB[k] != 0))
+                {
+                    continue;
+                }
+                else if((CountA[k] !=0) || (CountB[k] != 0))
+                {
+                    temp+=(k+'a');
+                    flag =1;
+
+                }
+                
+            }
+            
+            
+            return (flag ? temp : "-1");
+        }
+
+-----------------------------------------------------------------------------------------------
+ bool checkPangram (string s) {
+        // your code here
+        int n=s.length();int count[26]={0};char ch;
+        for(int i=0;i<n;i++)
+        {
+            s[i] = tolower(s[i]);
+            if(s[i]>='a' && s[i]<='z')
+            {
+            count[s[i]-'a']++;
+            }
+        }
+        
+        for(int k=0;k<26;k++)
+        {
+            if(count[k] == 0)
+            {
+                return 0;
+            }
+        }
+        
+        return 1;
+        
+    }
+------------------------------------------------------------------------------------
+ string longest(string names[], int n)
+    {
+        int max=INT_MIN;string word ="";int length;string result="";
+        for(int i=0;i<n;i++)
+        {
+          word = names[i];
+          length = word.length();
+          if(max < length)
+          {
+              max = length;
+              result = word;
+          }
+        }
+        
+        return result;
+        
+        
+    }
+---------------------------------------------------------------------------------------
+string removeDuplicates(string str) {
+	    // code here
+	    int n=str.length(); string temp; string result="";
+	    set<char> st;
+	    for(int i=0;i<n;i++)
+	    {
+	        if(st.find(str[i]) == st.end())
+	        {
+	            st.insert(str[i]);
+	            result+=str[i];
+	        }
+	    }
+	    
+	    
+	    return result;
+	    
+	}
+----------------------------------------------------------------------------------------------------
+
+ bool isIsogram(string s)
+    {
+        //Your code here
+        int n = s.length();
+        map<char,int> mp;
+        for(int i=0;i<n;i++)
+        {
+            mp[s[i]]++;
+        }
+        
+        for(auto itr : mp)
+        {
+            if(itr.second > 1)
+            {
+                return false;
+            }
+            
+            else if((itr.second == 1) && (mp.size() == n))
+            {
+                return true;
+            }
+        }
+    }
+
+---------------------------------------------------------------------------------------------------
+
+  //Function is to check whether two strings are anagram of each other or not.
+    bool isAnagram(string a, string b){
+        
+        // Your code here
+        set<char> sa;int m = a.length();
+        set<char> sb;int n = b.length();
+        
+        for(int i=0;i<m;i++)
+        {
+            sa.insert(a[i]);
+        }
+        
+        if(m!=n)
+        {
+            return false;
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            sb.insert(b[i]);
+        }
+        
+        for(int k=0;k<m;k++)
+        {
+            if((sb.find(a[k]) != sb.end()) && (sa.size() == sb.size()))
+            {
+                return true;
+            }
+        }
+        
+        return false;
+
+-------------------------------------------------------------------------------------------------
+
+ string reverseWords (string s)
+    {
+        //code here.
+        
+        int n = s.length(); string word="";string rev="";string result="";
+        vector<string> vs;
+        for(int i=0;i<n;i++)
+        {
+            while((s[i]!='.') && (i<n))
+            {
+                word+=s[i];
+                i++;
+            }
+            
+            reverse(word.begin(),word.end());
+            vs.push_back(word);
+            word="";
+        }
+        
+        for(int k=0;k<vs.size();k++)
+        {
+            if(k == vs.size()-1)
+            {
+               result+=vs[k]; 
+            }
+            else{
+            result+=vs[k] + '.';
+            }
+            
+            
+        }
+        
+        return result;
+    }
+
+---------------------------------------------------------------------------
+
+  long long ExtractNumber(string S){
+        
+        //code here
+        int n=S.length();int num=0;int max=INT_MAX;
+        for(int i=0;i<n;i++)
+        {
+           while((S[i]!=' ') && (i<n))
+           {
+               if(S[i]>=48 && S[i] <=57)
+               {
+               num = (num*10) + (S[i]-48);
+               }
+               i++;
+               
+           }
+
+           if(max>num)
+           {
+               max = num;
+           }
+         
+        }
+        
+        if(checkfunc(max))
+       {
+        return max;
+       }
+       else{
+           return -1;
+       }
+    }
+    
+    int checkfunc(long long num)
+    {
+         long long result=num;int digit=0;
+        while(num)
+        {
+            digit = num%10;
+            
+            if(digit==9)
+            {
+                return 0;
+            }
+            
+            num=num/10;
+        }
+        
+        return 1;
+    }
+
+---------------------------------------------------------------------------
+
+long long ExtractNumber(string S){
+        
+        //code here
+        int n=S.length();int num=0;int max=INT_MIN;
+        for(int i=0;i<n;i++)
+        {
+           while((S[i]!=' ') && (i<n))
+           {
+               if(S[i]>=48 && S[i] <=57)
+               {
+               num = (num*10) + (S[i]-48);
+               }
+               i++;
+               
+           }
+
+           if(max<num)
+           {
+               max = num;
+           }
+           num=0;
+         
+        }
+        
+        if(checkfunc(max))
+       {
+        return max;
+       }
+       else{
+           return -1;
+       }
+    }
+    
+    int checkfunc(long long num)
+    {
+         long long result=num;int digit=0;
+        while(num)
+        {
+            digit = num%10;
+            
+            if(digit==9)
+            {
+                return 0;
+            }
+            
+            num=num/10;
+        }
+        
+        return 1;
+    }
+
+
+-----------------------------------------------------------------------------------
+	vector<int> bracketNumbers(string S)
+	{
+	    // Your code goes here
+	    stack<char> st;
+	    int n=S.length();int count=0;vector<int> v;
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        if(S[i] == '(')
+	        {
+	            count++;
+	            st.push(count);
+	            v.push_back(st.top());
+	            
+	        }
+	        else if(S[i] == ')' && (!st.empty()))
+	        {
+	            v.push_back(st.top());
+	            st.pop();
+	        }
+	    }
+	    
+	    return v;
+	}
+
+--------------------------------------------------------------------------------------------------------------
+
+long long countBits(long long N) {
+        // code here
+        long long count=0;
+        for(long long i=1;i<=N;i++)
+        {
+            count+=setBits(i);
+        }
+        
+        return count;
+    }
+    
+    long long setBits(long long num)
+    {
+        long long sum=0;
+        while(num)
+        {
+          sum+=(num&1);
+          num>>=1;
+            
+        }
+        
+        return sum;
+    }
+
+------------------------------------------------------------------------------------
+int isSame(string s)
+	{
+	    // Your code goes here
+	    int n=s.length();int num=0;int count=0;
+	    for(int i=0;i<n;i++)
+	    {
+	        if(s[i] >=48 && s[i] <=57)
+	        {
+	           num=num*10 + (s[i]-'0'); 
+	        }
+	        else{
+	            count++;
+	        }
+	    }
+	    
+	    if(num == count)
+	    {
+	        return 1;
+	    }else{
+	        return 0;
+	    }
+	    
+	}
+--------------------------------------------------------------------------------------------
+
+https://www.geeksforgeeks.org/problems/substrings-of-length-k-with-k-1-distinct-elements/1?page=11&category=Strings,Bit%20Magic&sortBy=submissions
+---------------------------------------------------------------------------------------
+
+int countOfSubstrings(string S, int K) {
+        // code here
+        int n = S.length();vector<string> vs;bool count[26]={false};int c=0;int t,check=0;
+        string word="";int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            word=S.substr(i,K);
+            vs.push_back(word);
+            
+            for(c=0;c<word.length();c++)
+            {
+                count[word[c]-'a']=true;
+            }
+            
+            for(t=0;t<26;t++)
+            {
+                if(count[t])
+                {
+                    sum++;
+                }
+            }
+            
+           //return sum;
+            
+            if(sum==(K-1))
+            {
+                //check++;
+                return sum;
+            }
+            else
+            {
+                return -1;
+            }
+            count[26]={false};
+            sum=0;
+        }
+        
+      //  return check;
+    }
+
+--------------------------------------------------------------------------------
+  int swapNibbles(int N){
+        // code here
+        string s="";int digit=0;
+        while(N)
+        {
+            digit = N%2;
+            s+=to_string(digit);
+            N/=2;
+        }
+        
+        reverse(s.begin(),s.end());
+        s='0'+s;
+        string str="";int l=s.length();
+         //  int p = atoi(s.c_str());
+         //  return p;
+        
+        for(int i=0;i<l;i++)
+        {
+          str = s.substr(4,(l/2))  + s.substr(0,l/2);
+        }
+        
+        int num = atoi(str.c_str());
+        
+        return num;
+        
+        int base=1;int dig=0;int sum=0;
+        while(num)
+        {
+            dig = num%10;
+            sum+=(dig)*base;
+            base=base*2;
+            num=num/10;
+        }
+        
+        return sum;
+    }
+--------------------------------------------------------------------------------------------
+  int temp[32];
+        int k=0;
+        
+        while(N)
+        {
+          temp[k++]=(N%2);
+          N=N/2;
+        }
+        
+        for(int i=k,j=0;i>=0;i--,j++)
+        {
+            temp[j] = temp[i];
+        }
+        
+        for(int i=L;i<=R;i++)
+        {
+            if(temp[i] == 1)
+            {
+                temp[i]=0;
+            }
+            else if(temp[i] == 0)
+            {
+                temp[i]=1;
+            }
+        }
+        
+        int sum=0;int base=1;
+        for(int i=k;i>=0;i--)
+        {
+            sum+=(temp[i]*base);
+            base=base*2;
+        }
+        
+        return sum;
+
+----------------------------------------------------------------------------------------------
+
+int toggleBits(int N , int L , int R) {
+        // code here
+        while(L<=R)
+        {
+            N^=(1<<(L-1));
+            L++;
+        }
+        
+        
+      return N;
+        
+    }
+
+---------------------------------------------------------------------------------
+void toBinary(int N)
+{
+    // your code here
+    int digit=0;string str="";
+    while(N)
+    {
+        digit = N%2;
+        str += to_string(digit);
+        N/=2;
+    }
+    
+    reverse(str.begin(),str.end());
+    cout << str;
+        
+}
+-----------------------------------------------------------------------------------
+
+	vector<string> pattern(string S)
+	{
+	    // Your code goes here
+	    int n=S.length();
+	    vector<string> v;string word="";
+	    reverse(S.begin(),S.end());
+	    for(int i=0;i<n;i++)
+	    {
+	        word = S.substr(i,n);
+	        reverse(word.begin(),word.end());
+	        v.push_back(word);
+	        
+	    }
+	    
+	    return v;
+	}
+
+-------------------------------------------------------------------------------
+
+{
+        	//code here.
+        	int n=s.length();
+        	stack<int> st;int index=0;int index2=0;
+        	for(int i=0;i<n;i++)
+        	{
+        	    if(s[i] == '[')
+        	    {
+        	        index=i;
+        	        st.push(index);
+        	    }
+        	    else if(s[i] == ']')
+        	    {
+        	        if((st.top()!=pos) && (!st.empty()))
+        	        {
+        	            st.pop();
+        	        }else if(st.top() == pos)
+        	        {
+        	            index2=i;
+        	        }
+        	    }
+        	}
+        	
+        	return index2;
+        }
+
+------------------------------------------------------------------------------------------------------------------
+string maximumFrequency(string s){
+        // Complete the function
+        s=s+' ';
+        int n=s.length();
+        string word="";map<string,int> mp;
+        for(int i=0;i<n;i++)
+        {
+            while(s[i]!=' ')
+            {
+                word+=s[i];
+                i++;
+            }
+            
+            mp[word]++;
+            word="";
+            
+        }
+        
+        int max=INT_MIN;string result="";int count=0;
+        for(auto itr : mp)
+        {
+            if(itr.second>max)
+            {
+                max=itr.second;
+                result= itr.first;
+            }
+           
+            
+        }
+        result += ' '+to_string(max);
+        return result;
+}
+
+---------------------------------------------------------------------------------------------------
+
+	
+	int isPanagram(string S)
+	{
+	    // Your code goes here 
+	    int n=S.length();
+	    int count[26]={0};
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        S[i]=tolower(S[i]);
+	        count[S[i]-'a']++;
+	    }
+	    
+	    for(int i=0;i<26;i++)
+	    {
+	        if(count[i] == 0)
+	        {
+	            return 0;
+	        }
+	    }
+	    
+	    return 1;
+	}
+--------------------------------------------------------------------------------------------------
+int swapBits(int x, int p1, int p2, int n)
+    {
+        // Code Here
+        int mask = 0;
+        for (int i = 0; i < n; i++)
+            mask |= 1 << i;
+        int x1 = (x << (p2 - p1)) & (mask << p2);
+        int x2 = (x >> (p2 - p1)) & (mask << p1);
+        x &= (~(mask << p2));
+        x &= (~(mask << p1));
+        x |= x1;
+        x |= x2;
+        return x;
+    }
+--------------------------------------------------------------------------------------
+ int swapBits(int x, int p1, int p2, int n)
+    {
+        // Code Here
+        int num=x;int num1=0;int num2=0;int t=n;int p=n;
+        while(t--)
+        {
+         num1|=(num&(1<<(p1)));
+         p1++;
+        }
+        
+        while(p--)
+        {
+         num2|=(num&(1<<(p2)));
+         p2++;
+        }
+        
+        x|=(num1<<p2);
+        x|=(num2>>p1);
+        
+        return x;
+    }
+------------------------------------------------------------------------------------------------
+
+int swapBits(int x, int p1, int p2, int n)
+    {
+        vector<int>v(32,0);
+        int i=0,p=0;
+        while(x){
+            int t=x&1;
+            v[i++]=t;
+            x>>=1;
+        }
+        
+        while(n--)
+            swap(v[p1++],v[p2++]);
+        
+       for(int i=0;i<32;i++){
+           if(v[i])
+               x+=pow(2,p);
+           p++;
+       }
+        return x;
+    }
+
+------------------------------------------------------------------------------------------------
+int swapBits(int x, int p1, int p2, int n)
+    {
+        vector<int>v(32,0);
+        int i=0,p=0;
+        while(x){
+            int t=x&1;
+            v[i++]=t;
+            x>>=1;
+        }
+        
+        while(n--)
+            swap(v[p1++],v[p2++]);
+        
+       for(int i=0;i<32;i++){
+           if(v[i])
+               x+=pow(2,p);
+           p++;
+       }
+        return x;
+    }
+
+----------------------------------------------------------------------------------------------------------------
+long long int setAllOddBits(long long int n) {
+        // code here
+        int i=0;long long int temp=n;
+        while(n)
+        {
+            if((i%2) == 0)
+            {
+               temp |=(1<<i);
+            }
+            n>>=1;
+            i++;
+        }
+        
+        return temp;
+    }
+-----------------------------------------------------------------------------------------------------
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+
+class Solution{
+    public:
+        
+    int longestNull(string str)
+    {
+        int size = str.size();  
+        vector<pair<char,int>> input;
+        pair<char,int> p;
+        p.first = '@';
+        p.second = -1;
+        input.push_back(p);
+        int count = 0;
+        for(int i=0; i<size; i++)
+        {
+            pair<char,int> p;
+            p.first = str[i];
+            p.second = i;
+            input.push_back(p);
+            while(input.size() >= 3 && input[input.size()-1].first == '0' && input[input.size()-2].first == '0' && input[input.size()-3].first == '1')
+            {
+                input.pop_back();
+                input.pop_back();
+                input.pop_back();
+            }
+            int temp = input.size() - 1;
+            temp = input[temp].second;
+            count = max(count,i - temp);
+        }
+        return count;
+    }
+};
+
+// { Driver Code Starts.
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		string s;
+		cin>>s;
+		Solution ob;
+		cout<<ob.longestNull(s)<<endl;
+	}
+    return 0;
+}
+  // } Driver Code Ends
+
+-----------------------------------------------------------------------------------------------------
+	string remove3ConsecutiveDuplicates(string S)
+	{
+	    // Your code goes here
+	    int n=S.length(); string V="";
+	    
+	    
+	    for(int i=0;i<n;i++)
+	    {
+	        if(S.length() == 0 || S.length() == 1)
+	        {
+	            V.push_back(S[i]);
+	        }
+	        else if((S[i] == V[V.size()-1]) && (S[i]== V[V.size()-2]))
+	        {
+	            V.pop_back();
+	            V.pop_back();
+	        }
+	        else{
+	            V.push_back(S[i]);
+
+	        }
+	        
+	    }
+	    
+	  
+	    return (V.size() ? V : "-1");
+	    
+	  
+	}
+
+----------------------------------------------------------------------------------------------
+ bool ispar(string x)
+    {
+        // Your code here
+        int n =x.length();int count=0;int k=0;
+        stack<int> st;
+        for(int i=0;i<n;i++)
+        {
+            if(x[i] == '{')
+            {
+                count=1;
+                st.push(count);
+            }
+            else if(x[i] == '(')
+            {
+                count=2;
+                st.push(count);
+
+            }
+            else if(x[i] == '[')
+            {
+                count=3;
+                st.push(count);
+
+            }
+            
+             if(x[i] == '}')
+            {
+                k++;
+                st.pop();
+            }
+            else if(x[i] == ')')
+            {
+                k++;
+                st.pop();
+       
+            }
+            else if(x[i] == ']')
+            {
+               k++;
+               st.pop();
+            }
+        }
+        
+        if(st.empty())
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+-------------------------------------------------------------------------------------------
+ bool areRotations(string s1,string s2)
+    {
+        // Your code here
+     /*   string word="";int flag=0;int n2=s2.length();
+        if(n2!=s1.length())
+        {
+            return false;
+        }
+        s1+=s1;
+        int n=s1.length();
+        for(int i=0;i<n;i++)
+        {
+            word = s1.substr(i,n2);
+            
+            if(word == s2)
+            {
+                flag=1;
+                break;
+            }
+        }
+        
+
+        return (flag ? true : false);*/
+        
+        string result="";
+        result+=s1;
+        result+=s1;
+        
+        if(result.find(s2) != string::npos)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+------------------------------------------------------------------------------------------------------
+ int isValid(string s) {
+            // code here
+            int count=0;
+            for(int i=0;i<s.length();i++)
+            {
+                if(s[i]=='.')
+                {
+                  count++;  
+                }
+            }
+            if(count !=3)
+            {
+                return false;
+            }
+            s=s+".";
+            int n = s.length();string word="";vector<int> V;int num=0;int p=0;
+            for(int i=0;i<n;i++)
+            {
+                while(s[i]!='.')
+                {
+                    word+=s[i];
+                    i++;
+                }
+                
+                for(p=0;p<word.length();p++)
+                {
+                    if((word[p]>='a' && word[p]<='z') || (word[p]>='A' && word[p]<='Z'))
+                    {
+                        return false;
+                    }
+                }
+                
+                num = atoi(word.c_str());
+                if(num>=0 && num<=255)
+                {
+                    V.push_back(num);
+                }
+                else{
+                    return false;
+                }
+                word="";
+                
+            }
+            
+            if(V.size()!=4)
+            {
+                return false;
+            }
+            
+            for(int i=0;i<V.size();i++)
+            {
+                if((V[i] < 0) || (V[i] > 255))
+                {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+-----------------------------------------------------------------------------------
+string stringFilter(string str) 
+    { 
+        //code here.
+        int n=str.length();
+        string word="";int i=0;
+        while(i<n)
+        {
+            if(str[i]=='a' && str[i+1] == 'c' && (i+1 <n)){
+                i+=2;
+                continue;
+            }
+            else if(str[i] =='b')
+            {
+                i++;
+                continue;
+            }
+            else
+            {  
+                word+=str[i];
+                i++;
+            }
+        }
+        
+        return word;
+    }
+------------------------------------------------------------------------------------------------------
+string transform(string S){
+    //complete the function here
+    int n=S.length();
+    string word="";int count=1;int i=0;
+    for(int i=0;i<n;i++)
+    {
+        S[i]=tolower(S[i]);
+    }
+    
+    while(i<n)
+    {
+        if((S[i]==S[i+1]) && (i+1 <n))
+        {
+            count++;
+            i++;
+        }
+  
+        else{
+            word+=to_string(count)+S[i];
+            count=1;
+            i++;
+        }
+        
+
+    }
+    
+    return word;
+}
+
+--------------------------------------------------------------------------------------
+ string onesComplement(string S,int N){
+        //code here
+       string rev="";
+       for(int i=0;i<S.length();i++)
+       {
+           if(S[i] == '1')
+           {
+               rev.push_back('0');
+           }
+           else{
+               rev.push_back('1');
+           }
+       }
+       
+       return rev;
+    }
+
+------------------------------------------------------------------------------------
+  string makeEven(string s)
+    {
+        //code here.
+        int n=s.length();string word=""; string str=s+s;long long int num=0;int max=INT_MIN;int count=0;int l=0;int r=0;
+       // for(int i=0;i<str.length();i++)
+      //  {
+         //  word = str.substr(i,n);
+         int i=0;
+         while(i<n)
+          { 
+           swap(s[i++],s[n--]);
+           num=atoi(s.c_str());
+           
+           if(num%2 == 0)
+           {
+               if(max<num)
+               {
+                   max=num;
+                   count++;
+               }
+           }
+           
+           if(count==1)
+           {
+               break;
+           }
+           
+        }
+        
+        return (count ? to_string(max) : to_string(num));
+    }
+
+------------------------------------------------------------------------------------------------
+ string makeEven(string str)
+    {
+        //code here.
+     int n = str.size();
+    	int e = INT_MAX, ind;
+    
+    	for (int i = 0; i < n - 1; i++) {
+    
+    		if ((str[i] - '0') % 2 == 0) {
+    			e = (str[i] - '0');
+    			ind = i;
+    		}
+    		if (e <= (str[n - 1] - '0'))
+    			break;
+    	}
+    	if (e == INT_MAX)
+    		return str;
+    
+    	swap(str[ind], str[n - 1]);
+    
+    	return str;
+    }
+-----------------------------------------------------------------------------------------------------------
+ vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+        {
+            //code here.
+            map<int,int> mpa;map<int,int>mpb;vector<int> result; set<int> mpc;
+            for(int i=0;i<n1;i++)
+            {
+              mpa[A[i]]++;  
+            }
+            
+            for(int i=0;i<n2;i++)
+            {
+                mpb[B[i]]++;
+            }
+            
+            for(int k=0;k<n3;k++)
+            {
+                if((mpa.find(C[k]) != mpa.end()) && (mpb.find(C[k]) !=mpb.end()))
+                {
+                    if(mpc.find(C[k]) == mpc.end())
+                    {
+                     result.push_back(C[k]);   
+                    }
+                    else{
+                        mpc.insert(C[k]);
+                    }
+                }
+            }
+            
+            for(int i=0;i<result.size();i++)
+            {
+                if(result[result.size()-1] == result[result.size()-2])
+                {
+                    result.pop_back();
+                }
+                
+            }
+            
+            
+            
+            return result;
+        }
+
+
+--------------------------------------------------------------------------------------------------
+  //code here.
+            map<int,int> mpa;map<int,int>mpb;vector<int> result; set<int> mpc;
+            for(int i=0;i<n1;i++)
+            {
+              mpa[A[i]]++;  
+            }
+            
+            for(int i=0;i<n2;i++)
+            {
+                mpb[B[i]]++;
+            }
+            
+            for(int k=0;k<n3;k++)
+            {
+                if((mpa.find(C[k]) != mpa.end()) && (mpb.find(C[k]) !=mpb.end()))
+                {
+                    if(mpc.find(C[k]) == mpc.end())
+                    {
+                     result.push_back(C[k]); 
+                     mpc.insert(C[k]);
+                    }
+                }
+            }
+            
+            for(int i=0;i<result.size();i++)
+            {
+                if(result[result.size()-1] == result[result.size()-2])
+                {
+                    result.pop_back();
+                }
+                
+            }
+            
+            
+            
+            return result;
+        }
+-----------------------------------------------------------------------------------------------------------------------
+   void rotateArr(int arr[], int d, int n){
+        // code here
+        int i;int k=0;int rot=0;
+        while(d--)
+        {
+        k=arr[0];
+        for(i=0;i<n-1;i++)
+        {
+            arr[i]=arr[i+1];
+        }
+        arr[n-1]=k;
+        }
+    }
+-------------------------------------------------------------------------------------------
+int getPairsCount(int arr[], int n, int k) {
+        // code here
+
+    unordered_map<int, int> m;
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (m.find(k - arr[i]) != m.end()) {
+            count += m[k - arr[i]];
+        }
+        m[arr[i]]++;
+    }
+    return count;
+
+    }
+
+---------------------------------------------------------------------------------------------------
+bool anti (string s , string str2)
+    {
+        
+        rotate(s.begin() , s.begin()+2 , s.end());
+        
+        if(s.find(str2)!=string::npos) return 1;
+        
+        else return 0;
+    }
+    bool cl (string s ,  string str2)
+    {
+        
+        rotate(s.begin() , s.end()-2 , s.end());
+      
+        
+         if(s.find(str2)!=string::npos) return 1;
+         
+        else return 0;
+    }
+    bool isRotated(string str1, string str2)
+    {
+    
+       if(str1.size()!=str2.size()) return 0;
+       if(str1.size()==1)
+       {
+           return str1[0]==str2[0];
+       }
+       if(anti(str1  , str2) || cl(str1  , str2) ) return 1;
+       
+       return 0;
+    }
+-----------------------------------------------------------------------------------------------------------
+ //another string by exactly 2 places.
+    bool isRotated(string str1, string str2)
+    {
+        // Your code here
+        //str1+=str1;
+        int l1=str1.length();string word="";int l2=str2.length();int count=0;int flag=0;
+        
+       /* for(int i=0;i<l1;i++)
+        {
+            word = str1.substr(i,l2);
+            count++;
+            
+            if(word == str2)
+            {
+                if(count == 2)
+                {
+                    flag=1;
+                }
+            }
+            
+        }
+        */
+        int d=2;char k;
+        while(d--)
+        {
+          k=str1[0];
+          for(int i=0;i<l1;i++)
+          {
+              str1[i]=str1[i+1];
+          }
+          
+          str1[l1-1]=k;
+          
+        }
+        
+        if(str1==str2)
+        {
+            flag=1;
+        }
+        
+        d=2;
+        
+        while(d--)
+        {
+          k=str1[l1-1];
+          for(int i=1;i<l1;i++)
+          {
+              str1[i]=str1[i-1];
+          }
+          
+          str1[0]=k;
+          
+        }
+        
+        if(str1==str2)
+        {
+            flag=1;
+        }
+        
+        return (flag ? true : false);
+    }
+
+------------------------------------------------------------------------------------------------
+
+int countTriplet(int arr[], int n)
+	{
+	 set<int>s;
+        int ans=0;
+        for(int i=0;i<n;i++)
+        {
+            s.insert(arr[i]);
+        }
+      for(int i=0;i<n;i++)
+      {
+          for(int j=0;j<n&&i!=j;j++)
+          {
+              if(s.find((arr[i]+arr[j]))!=s.end())
+              ans++;
+          }
+      }
+      return ans;
+	}
+
+---------------------------------------------------------------------------------
+ // Your code goes he
+    int count=0;
+    sort(arr, arr+n);
+    unordered_map<int,int>m;
+    
+    for(int i=0;i<n;i++)
+    {
+        m[arr[i]]++;
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(m.find(arr[i]+arr[j])!=m.end())
+            {
+                count++;
+            }
+        }
+    }
+    return count;
+}  
+};
+
+-----------------------------------------------------------------------------------------
+void pushZerosToEnd(int arr[], int n) {
+	    // code here
+	    vector<int> v;int count=0;
+	    for(int i=0;i<n;i++)
+	    {
+	        if(arr[i]!=0)
+	        {
+	            v.push_back(arr[i]);
+	        }
+	        else{
+	            count++;
+	        }
+	        
+	    }
+	    
+	    for(int k=0;k<count;k++)
+	    {
+	        v.push_back(0);
+	    }
+	    
+	    for(int k=0;k<n;k++)
+	    {
+	        arr[k]=v[k];
+	    }
+	    
+	}
+
+------------------------------------------------------------------------------------
+ stack<int> temp;
+        for(int i=0;i<sizeOfStack/2;i++)
+        {
+            temp.push(s.top());
+             s.pop();
+        }
+        s.pop();
+        for(int i=0;i<sizeOfStack/2;i++){
+            s.push(temp.top());
+            temp.pop();
+        }
+
+---------------------------------------------------------------------------------
+  void segregateElements(int arr[],int n)
+    {
+        // Your code goes here
+        int temp[n];int k=0;vector<int>V;
+        for(int i=0;i<n;i++)
+        {
+            if(arr[i] < 0)
+            {
+                temp[k++]=arr[i];
+            }
+            else{
+                V.push_back(arr[i]);
+            }
+        }
+        
+        for(int p=0;p<k;p++)
+        {
+            V.push_back(temp[p]);
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            arr[i] =V[i];
+        }
+    }
+
+-------------------------------------------------------------------------------------------------
+
+      // Your code here
+   /*     int count=1;int i=0;int digm=0;int dign=0;int flag=0;
+        while(m && n)
+        {
+            digm=m&(1<<i);
+            dign=n&(i<<i);
+            
+            count++;
+            i++;
+            if(digm!=dign)
+            {
+                flag=1;
+                break;
+            }
+        }
+        
+        return count;*/
+        if(m==n)
+        return -1;
+        vector<int>v,v1;
+        while(m!=0)
+        {
+            v.push_back(m%2);
+            m/=2;
+        }
+        while(n!=0)
+        {
+            v1.push_back(n%2);
+            n/=2;
+        }
+        for(int i=0;i<v.size()+v1.size();i++)
+        {
+            if(v[i]!=v1[i])
+            return i+1;
+        }
+        return -1;
+    }
+
+---------------------------------------------------------------------
+int findExtra(int a[], int b[], int n) {
+        // add code here.
+        set<int> s1;
+        for(int i=0;i<n;i++)
+        {
+            s1.insert(a[i]);
+        }
+        set<int> s2;
+        for(int j=0;j<n-1;j++)
+        {
+            s2.insert(b[j]);
+        }
+        int index=0;
+        for(int i=0;i<n;i++)
+        {
+            if(s2.find(a[i]) == s2.end())
+            {
+                index=i;
+            }
+        }
+        
+        return index;
+    }
+--------------------------------------------------------------------------
+ int firstNonRepeating(int a[], int n) 
+    { 
+        // Complete the function
+    unordered_map< int, int > m;
+    for ( int i{}; i < n; ++i ) ++m[ a[ i ]];
+    for ( int i{}; i < n; ++i )
+        if ( m[ a[ i ]] == 1 ) return a[ i ];
+    return 0;
+    } 
+---------------------------------------------------------------------------------
+
+ vector <int> rotate (int n, int d)
+        {
+            //code here.
+            vector<int> V; int temp[16]={0};int temp2[16]={0};
+            int c=0;
+            while(n)
+            {
+               temp[c++]=n%2;
+               n/=2;
+            }
+            //reverse
+            for(int i=0;i<16;i++)
+            {
+                temp[i]=temp[16-i-1];
+            }
+            for(int i=0;i<16;i++)
+            {
+                temp2[i]=temp[i];
+            }
+            int l1=d;int k=0;int b;
+            while(l1--)
+            {
+               k=temp[0];
+               for(b=0;b<16;b++)
+               {
+                   temp[b]=temp[b+1];
+               }
+               
+               temp[c-1]=k;
+            }
+            int base=1;int res1=0;
+            for(int i=0;i<16;i++)
+            {
+                //if(temp[i])
+               // {
+                    res1+=(base*temp[i]);
+              //  }
+                
+                base=base*2;
+            }
+            V.push_back(res1);
+            
+            
+            
+            
+            
+            
+             int l2=d;int k2=0;int b1;
+            while(l2--)
+            {
+               k2=temp2[15];
+               for(b1=1;b1<16;b1++)
+               {
+                   temp2[b1]=temp2[b1-1];
+               }
+               
+               temp2[0]=k2;
+            }
+            int base1=1;int res2=0;
+            for(int i=0;i<16;i++)
+            {
+                //if(temp[i])
+               // {
+                    res2+=(base1*temp2[i]);
+              //  }
+                
+                base1=base1*2;
+            }
+            V.push_back(res2);
+            
+            return V;
+            
+        }
+
+------------------------------------------------------------------------------------------------------
+  vector <int> rotate (int n, int d)
+        {
+            //code here.
+        d%=16;
+        int a=((n<<d)|(n>>(16-d)))&0xFFFF;
+        int b=((n>>d)|(n<<(16-d)))&0xFFFF;
+        return {a,b};
+         
+        }
+
+--------------------------------------------------------------------------------------------------
+
+int KthMissingElement(int a[], int n, int k)
+{
+    // Complete the function
+    map<int,int> mp;
+    for(int i=0;i<n;i++)
+    {
+        mp[a[i]]++;
+    }
+    
+    int count=0;
+    
+    for(int j=a[0];j<=a[n-1];j++)
+    {
+        if(mp.find(j) == mp.end())
+        {
+            count++;
+        
+        
+        if(count == k)
+        {
+            return j;
+        }
+        }
+    }
+    
+    return -1;
+}
+
+----------------------------------------------------------------------------------------------
+
+User
+Pratham
+3 months ago
+
+// solved with o(n) time complexity and with no extra space 
+
+1 Time complexity O(n) 
+
+2 Space complexity O(1) 
+
+string findMax(string str) {
+        // code here
+        string newstr="";
+        vector<int>arr(10,0);
+        for(int i=0;i<str.size();i++){
+            int digit=str[i]-'0';
+            arr[digit]++;
+        }
+        int nSize=str.size()-1;
+        for(int i=9;i>=0;i--){
+            int count= arr[i];
+            for(int j=0;j<count;j++){
+                newstr+= i+'0';
+            }
+        }
+        return newstr;
+    }
+
+..... see less
+
+0
+
+0
+Reply
+User
+Sahil
+5 months ago
+
+map<int,int,greater<int>>mp;
+        string ans;
+        for(auto i:n)mp[i]++;
+        for(auto i:mp){
+            for(int j=0;j<i.second;j++){
+                ans+=i.first;
+            }
+        }
+        return ans;
+
+..... see less
+
+0
+
+0
+Reply
+User
+Kajalrajak
+5 months ago
+
+string findMax(string N) 
+    {
+        sort(N.begin(),N.end());
+        reverse(N.begin(),N.end());
+        return(N);
+        // code here
+    }
+
+------------------------------------------------------------------------------------------
+  
+    bool threeCheck(int num){
+    while(num>0){
+        long r=num%10;
+        if(r==3){
+            return true;
+        }
+        num/=10;
+    }
+    return false;
+}
+    int count(int N){
+        long count=0;
+        for(int i=0;i<=N;i++){
+            if(threeCheck(i)){
+                count++;
+            }
+        }
+        int ans=N-count;
+        return ans;
+    }
+
+---------------------------------------------------------------------------------------------
+
+
+// C++ program to demonstrate functioning of substr()
+#include <iostream>
+#include <string>
+using namespace std;
+ 
+int main()
+{
+    // Take any string
+    string s = "dog:cat";
+ 
+    // Find position of ':' using find()
+    int pos = s.find(":");
+ 
+    // Copy substring after pos
+    string sub = s.substr(pos + 1);
+ 
+    // prints the result
+    cout << "String is: " << sub;
+ 
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------
+// C++ program to demonstrate all possible
+// substrings of a given string
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to print all sub strings
+void subString(string s, int n)
+{
+	// Pick starting point in outer loop
+	// and lengths of different strings for
+	// a given starting point
+	for (int i = 0; i < n; i++)
+		for (int len = 1; len <= n - i; len++)
+			cout << s.substr(i, len) << endl;
+}
+
+// Driver program to test above function
+int main()
+{
+	string s = "abcd";
+	subString(s, s.length());
+	return 0;
+}
+
+
+-------------------------------------------------------------------------------------------
+Dear Sir, Greetings! Nice to connect with you on Linkedin. My name is Mohar Raj Dutta. I am currently working as a Senior Software Engineer at Analog Devices, Ireland. I am currently looking for software engineer role based at NXP India and I am willing to relocate to India. I have attached my CV below for your reference.
+
+With regards,
+
+Mohar Raj Dutta
+----------------------------------------------------------------------------------------------------------
+
+9230707079
+labnya villa Jadav railway sta 212 bus stop
+//inputs 32 number, position
+//https://www.geeksforgeeks.org/google-interview-experience-for-chrome-os-firmware-engineer-2-year-exp//
+https://www.interviewbit.com/embedded-c-interview-questions/
+5/6 Vivek jadavpur
+#include <stdio.h>
+static count =0;
+int func(int count)
+{
+count++;
+return count
+}
+int main()
+{
+int count=0;
+int p = func(count); 1
+func(count) 2
+func(count); 3
+
+uint32_t num;
+int8_t position;
+uint32_t result =funcsetbit(num,position);
+(uint32_t)(*setfunctionpointer)(uint32_t,uint8_t) = &funcsetbit;
+setfunctionpointer(0XABCD,13);
+printf ("%d",result);
+}
+
+uint32_t funcsetbit(uint32_t num,uint8_t position)
+{
+
+num |= ( 1<<(position);
+num &= ~( 1<<(position);
+
+return num;
+}
+
+num = 0xABCD;
+A = 
+A=10, 1010
+B=11,  8 4 2 1
+       1 0 1 1     
+C=12,  8 4 2 1
+       1 1 0 0
+D=13,
+       8 4 2 1
+       1 1 0 1
+num = 1010 1011 1100 1101
+       
+      0010 0000 0000 0000
+      ~
+      1101 1111 1111 1111
+      
+      1000 1011 1100 1101
+      0x8BCD
+      0x8BC
+    1000 = 9
+    1001 =A
+    1010 =B
+    1011 =C
+
+      
+position = 13;
+
+
+https://www.geeksforgeeks.org/cpp-program-to-read-content-from-one-file-and-write-it-into-another-file/
+
+https://www.geeksforgeeks.org/cpp-program-to-copy-the-contents-of-one-file-into-another-file/?ref=ml_lbp
+https://www.geeksforgeeks.org/cpp-program-to-copy-one-file-into-another-file/?ref=ml_lbp
+
+
+https://www.geeksforgeeks.org/cpp-program-to-append-a-string-in-an-existing-file/
+
+https://www.geeksforgeeks.org/reverse-the-content-of-a-file-and-store-it-in-another/?ref=ml_lbp
+https://www.geeksforgeeks.org/how-to-read-and-write-arrays-to-and-from-files-in-cpp/
+
+
+
+
+temperature sensor DHT11
+
+
+float temp;
+int tempPin = 0;
+
+void setup() {
+   Serial.begin(9600);
+}
+
+void loop() {
+   temp = analogRead(tempPin);
+   // read analog volt from sensor and save to variable temp
+   temp = temp * 0.48828125;
+   // convert the analog volt to its temperature equivalent
+   Serial.print("TEMPERATURE = ");
+   Serial.print(temp); // display temperature value
+   Serial.print("*C");
+   Serial.println();
+   delay(1000); // update sensor reading each one second
+}
+
+
+
+pthread--------------
+
+
+https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2&index=1&ab_channel=CodeVault
+
+thread class ---------------
+https://www.geeksforgeeks.org/multithreading-in-cpp/
+
+spinlock
+https://github.com/CoffeeBeforeArch/parallel_cpp/blob/main/005_spinlocks/1_spinlock.cpp
+
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+using namespace std;
+
+int maxSubarraySum(vector<int> arr){
+    //Complete this function, your function should return the maximum subarray sum
+    int n = arr.size();
+    
+    int sum=0;int ms=0;
+    for(int i=0;i<n;i++)
+    {
+        sum+=arr[i];
+        ms = max(ms,sum);
+        
+        if(sum < 0)
+        {
+            sum=0;
+        }
+    }
+    
+    if(sum == 0)
+    {
+        return 0;
+    }
+    else{
+        return ms;
+    }
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------
+    
